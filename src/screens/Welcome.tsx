@@ -1,77 +1,95 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function HomeScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSignIn = () => {
-    // Handle sign-in logic here
-    alert('Sign In Clicked');
-  };
-
+export default function WelcomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Road Bingo!</Text>
-      
-      <TextInput
-        style={styles.input}
-        onChangeText={setEmail}
-        value={email}
-        placeholder="Email"
-        keyboardType="email-address"
-      />
+    <SafeAreaView style={styles.container}>
+      <StatusBar hidden={true} />
+      <View style={styles.brandContainer}>
+        {/* Replace with your brand's logo */}
+        <Image source={require('./assets/icon.png')} style={styles.logo} />
+        <Text style={styles.brandName}>Velna Zoss</Text>
+      </View>
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setPassword}
-        value={password}
-        placeholder="Password"
-        secureTextEntry
-      />
+      <Text style={styles.appName}>bingogogo!</Text>
 
-      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-        <Text style={styles.buttonText}>Sign In</Text>
+      {/* Sign-in options */}
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Log In with Username</Text>
       </TouchableOpacity>
 
-      <StatusBar style="auto" />
-    </View>
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Log In with Email</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Log In with Google</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Log In with Apple ID</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Log In with Play Store</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <Text style={styles.buttonText}>Log In with Facebook</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.helpButton} onPress={() => {}}>
+        <Text style={styles.helpButtonText}>Need Help?</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  brandContainer: {
+    alignItems: 'center',
     marginBottom: 20,
   },
-  input: {
-    width: '80%',
-    height: 40,
-    backgroundColor: '#fff',
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    marginBottom: 10,
-    borderRadius: 5,
+  logo: {
+    width: 100,
+    height: 100,
+    // Adjust the size according to your logo
+  },
+  brandName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  appName: {
+    fontSize: 20,
+    fontWeight: '500',
+    marginBottom: 30,
   },
   button: {
-    width: '80%',
     backgroundColor: '#007bff',
-    padding: 10,
+    padding: 15,
+    width: '80%',
     alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 5,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
+    fontSize: 16,
+  },
+  helpButton: {
+    position: 'absolute',
+    bottom: 20,
+  },
+  helpButtonText: {
+    color: '#007bff',
     fontSize: 16,
   },
 });
