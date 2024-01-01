@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Home screen!</Text>
+      <Text>Welcome!</Text>
       <StatusBar style="auto" />
+
+      <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Create or host a game</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -18,4 +22,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    backgroundColor: '#6C63FF',
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  }
 });
