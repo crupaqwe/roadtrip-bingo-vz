@@ -6,7 +6,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../utils/types/types'; // Adjust the import path as needed
 
 // Define the navigation prop based on the RootStackParamList
-type HomeNavigationProp = StackNavigationProp<RootStackParamList>;
+type HomeNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const Home: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProp>();
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       
       <Button
         title="Play bingo!"
-        onPress={() => navigation.navigate('LobbyChoiceScreen')}
+        onPress={() => navigation.navigate('LobbyChoice')}
       />
       <Button
         title="About / Profile"

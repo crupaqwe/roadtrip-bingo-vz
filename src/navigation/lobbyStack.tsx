@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 
 const LobbyChoiceStack = () => {
   return (
-    <Stack.Navigator initialRouteName="LobbyChoiceScreen">
+    <Stack.Navigator >
       <Stack.Screen name="LobbyChoice" component={LobbyChoice} />
       <Stack.Screen name="CreateLobby" component={CreateLobby} />
       <Stack.Screen name="JoinLobby" component={JoinLobby} />

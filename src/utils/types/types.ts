@@ -1,10 +1,11 @@
 // types.ts
 export type RootStackParamList = {
     Home: undefined;
+    LobbyChoice: undefined;
     CreateLobbyScreen: undefined;
     JoinLobbyScreen: undefined;
     Profile: undefined;
-    LobbyChoiceScreen: undefined;
+    
     SignUp: undefined;
     SignIn: undefined;
     ForgotPassword: undefined;

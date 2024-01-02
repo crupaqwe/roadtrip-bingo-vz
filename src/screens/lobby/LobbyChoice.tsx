@@ -6,10 +6,10 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../utils/types/types'; // Adjust the import path as needed
 
 // Define the navigation prop based on the RootStackParamList
-type LobbyChoiceScreenNavigationProp = StackNavigationProp<RootStackParamList>;
+type LobbyChoiceNavigationProp = StackNavigationProp<RootStackParamList>;
 
-const LobbyChoiceScreen: React.FC = () => {
-  const navigation = useNavigation<LobbyChoiceScreenNavigationProp>();
+const LobbyChoice: React.FC = () => {
+  const navigation = useNavigation<LobbyChoiceNavigationProp>();
 
   return (
     <View style={styles.container}>
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LobbyChoiceScreen;
+export default LobbyChoice;
