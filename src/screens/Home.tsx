@@ -1,36 +1,60 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../utils/types/types'; // Adjust the import path as needed
 
-export default function HomeScreen() {
+// Define the navigation prop based on the RootStackParamList
+type HomeNavigationProp = StackNavigationProp<RootStackParamList>;
+
+const Home: React.FC = () => {
+  const navigation = useNavigation<HomeNavigationProp>();
+
   return (
     <View style={styles.container}>
-      <Text>Welcome!</Text>
+      <Text style={styles.welcomeText}>Welcome!</Text>
       <StatusBar style="auto" />
+      
+      <Button
+        title="Play bingo!"
+        onPress={() => navigation.navigate('LobbyChoiceScreen')}
+      />
+      <Button
+        title="About / Profile"
+        onPress={() => navigation.navigate('Profile')}
+      />
 
-      <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Create or host a game</Text>
-      </TouchableOpacity>
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+     flex: 1,
+     backgroundColor: '#F5FCFF',
+     alignItems: 'center',
+     justifyContent: 'center',
+  },
+  welcomeText: {
+     fontSize: 24,
+     fontWeight: 'bold',
+     textAlign: 'center',
+     margin: 10,
   },
   button: {
-    backgroundColor: '#6C63FF',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 10,
+     alignItems: 'center',
+     backgroundColor: '#6C63FF',
+     padding: 10,
+     marginTop: 20,
+     width: '80%',
+     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  }
-});
+     fontSize: 18,
+     color: '#fff',
+  },
+ });
+
+export default Home;
