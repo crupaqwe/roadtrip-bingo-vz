@@ -6,7 +6,7 @@ interface JoinLobbyData {
   userName: string;
 }
 
-async function joinLobby({ lobbyId, userId, userName }: JoinLobbyData) {
+export async function joinLobby({ lobbyId, userId, userName }: JoinLobbyData) {
   const db = getDatabase();
   const lobbyRef = ref(db, `lobbies/${lobbyId}`);
 

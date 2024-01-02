@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../utils/types/types'; // Adjust the import path as needed
+import { RootStackParamList } from '../../utils/types/types'; // Adjust the import path as needed
 
 // Define the navigation prop based on the RootStackParamList
 type HomeNavigationProp = StackNavigationProp<RootStackParamList>;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Switch, StyleSheet } from 'react-native';
-import { createLobby } from '../utils/services/createLobby'; 
+import { createLobby } from '../../utils/services/createLobby'; 
 
 const LobbiesScreen = () => {
   const [lobbyName, setLobbyName] = useState('');

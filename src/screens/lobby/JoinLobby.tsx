@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { joinLobby } from '../utils/services/joinLobby'; // Adjust the import path as necessary
-import { listPublicLobbies } from '../utils/services/listPublicLobbies'; // Adjust the import path as necessary
-import { RootStackParamList } from '../utils/types/types'; // Adjust the import path as needed
+import { joinLobby } from '../../utils/services/joinLobby'; // Adjust the import path as necessary
+import { listPublicLobbies } from '../../utils/services/listPublicLobbies'; // Adjust the import path as necessary
+import { RootStackParamList } from '../../utils/types/types'; // Adjust the import path as needed
 
 type JoinLobbyScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'JoinLobbyScreen'>;
