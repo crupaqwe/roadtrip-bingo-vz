@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ScrollView,
   View,
@@ -8,11 +8,15 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  Alert,
+  Keyboard,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Make sure you've installed this package
+import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../utils/types/types'; // adjust the path to your actual types.ts file
+import { RootStackParamList } from '../../utils/types/types'; // Replace with your types path
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase'; // Replace with your firebase config path
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
 
@@ -20,28 +24,47 @@ const SignIn: React.FC = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+      setKeyboardVisible(true);
+    });
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   const handleEmailLogin = () => {
-    // Implement email login logic
-    console.log('Email login', email, password);
+    // Your login logic here
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        Alert.alert('Logged In', `Welcome ${userCredentials.user.email}`);
+      })
+      .catch((error) => {
+        Alert.alert('Login failed', error.message);
+      });
   };
 
   const handleGoogleLogin = () => {
-    // Implement Google login logic
-    console.log('Google login');
+    console.log('Google login logic goes here');
   };
 
   const handleFacebookLogin = () => {
-    // Implement Facebook login logic
-    console.log('Facebook login');
+    console.log('Facebook login logic goes here');
   };
 
   const handleCreateAccountPress = () => {
-    navigation.navigate('SignUp'); // Use the correct route name for your sign-up screen
+    navigation.navigate('SignUp');
   };
 
   const handleForgotPasswordPress = () => {
-    navigation.navigate('ForgotPassword'); // Use the correct route name for your forgot password screen
+    navigation.navigate('ForgotPassword');
   };
 
   return (
@@ -49,45 +72,42 @@ const SignIn: React.FC = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      <ScrollView contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        contentContainerStyle={styles.contentContainer}
+        keyboardShouldPersistTaps='handled'
+      >
         <Text style={styles.title}>Welcome Back</Text>
         
         <TextInput
-          style={styles.input}
+          style={[styles.input, { marginBottom: isKeyboardVisible ? 10 : 20 }]}
           placeholder="Email"
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
         />
         <TextInput
-          style={styles.input}
+          style={[styles.input, { marginBottom: isKeyboardVisible ? 10 : 20 }]}
           placeholder="Password"
           secureTextEntry
           value={password}
           onChangeText={setPassword}
         />
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleEmailLogin}>
+        <TouchableOpacity
+          style={[styles.loginButton, { marginBottom: isKeyboardVisible ? 10 : 20 }]}
+          onPress={handleEmailLogin}
+        >
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
 
-        <Icon.Button
-          name="google"
-          backgroundColor="#DB4437"
-          onPress={handleGoogleLogin}
-          style={styles.buttonIcon}
-        >
-          Login with Google
-        </Icon.Button>
-
-        <Icon.Button
-          name="facebook"
-          backgroundColor="#3b5998"
-          onPress={handleFacebookLogin}
-          style={styles.buttonIcon}
-        >
-          Login with Facebook
-        </Icon.Button>
+        <View style={[styles.socialButtonsContainer, { marginBottom: isKeyboardVisible ? 10 : 20 }]}>
+          <FontAwesome.Button name="google" backgroundColor="#DB4437" onPress={handleGoogleLogin}>
+            Google
+          </FontAwesome.Button>
+          <FontAwesome.Button name="facebook" backgroundColor="#3b5998" onPress={handleFacebookLogin}>
+            Facebook
+          </FontAwesome.Button>
+        </View>
 
         <TouchableOpacity onPress={handleCreateAccountPress}>
           <Text style={styles.linkText}>Create account</Text>
@@ -101,15 +121,15 @@ const SignIn: React.FC = () => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f2f5',
+    justifyContent: 'center',
   },
   contentContainer: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    flexGrow: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
@@ -125,7 +145,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     fontSize: 16,
-    marginBottom: 15,
   },
   loginButton: {
     width: '80%',
@@ -134,24 +153,40 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 15,
   },
-  loginButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  buttonIcon: {
+  socialButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     width: '80%',
-    paddingVertical: 10,
-    marginBottom: 15,
+    marginBottom: 20,
+  },
+  socialButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 10,
+    marginHorizontal: 5,
+  },
+  socialButtonText: {
+    marginLeft: 10,
+    color: '#fff',
+    fontWeight: 'bold',
   },
   linkText: {
     color: '#6C63FF',
     fontSize: 16,
-    marginTop: 15,
+    marginTop: 20,
+    textDecorationLine: 'underline',
   },
-  // Add any additional styles you need here
-});
+  loginButtonText: {
+    color: '#fff', // White color for the text
+    fontSize: 18,   // Font size can be adjusted as needed
+    fontWeight: 'bold', // Bold font weight for better readability
+    // If you're using a custom font, you can add the fontFamily property here
+  },
 
-export default SignIn;
+  });
+
+  export default SignIn;

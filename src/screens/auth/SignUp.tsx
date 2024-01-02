@@ -1,83 +1,140 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  Text,
+  ScrollView,
   View,
+  Text,
   TextInput,
   TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../utils/types/types"; // adjust the path to your actual types.ts file
+import firebase from "../../config/firebase";
+import { auth } from "../../config/firebase"; // adjust the path to your actual firebaseConfig file
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function HomeScreen() {
+type SignUpScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SignUp"
+>;
+const SignUp: React.FC = () => {
+  const navigation = useNavigation<SignUpScreenNavigationProp>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSignIn = () => {
-    // Handle sign-in logic here
-    alert("Sign In Clicked");
+  const handleSignUp = () => {
+    if (password !== confirmPassword) {
+      Alert.alert("Passwords don't match");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        if (userCredentials.user) {
+          console.log(userCredentials.user);
+          Alert.alert("Account created!");
+          // Perform any additional operations after account creation
+        }
+      })
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome to bingo!</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.title}>Create New Account</Text>
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setEmail}
-        value={email}
-        placeholder="Email"
-        keyboardType="email-address"
-      />
+        <TextInput
+          style={styles.input}
+          onChangeText={setEmail}
+          value={email}
+          placeholder="Email"
+          keyboardType="email-address"
+        />
 
-      <TextInput
-        style={styles.input}
-        onChangeText={setPassword}
-        value={password}
-        placeholder="Password"
-        secureTextEntry
-      />
+        <TextInput
+          style={styles.input}
+          onChangeText={setPassword}
+          value={password}
+          placeholder="Password"
+          secureTextEntry
+        />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
+        <TextInput
+          style={styles.input}
+          onChangeText={setConfirmPassword}
+          value={confirmPassword}
+          placeholder="Confirm Password"
+          secureTextEntry
+        />
 
-      <StatusBar style="auto" />
-    </View>
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+          <Text style={styles.linkText}>Already have an account? Sign In</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#f0f2f5",
+  },
+  contentContainer: {
+    paddingTop: 20,
+    paddingBottom: 20,
     alignItems: "center",
-    justifyContent: "center",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    color: "#333",
     marginBottom: 20,
   },
   input: {
     width: "80%",
-    height: 40,
+    height: 50,
     backgroundColor: "#fff",
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    marginBottom: 10,
-    borderRadius: 5,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    marginBottom: 15,
   },
   button: {
     width: "80%",
-    backgroundColor: "#007bff",
-    padding: 10,
-    alignItems: "center",
+    height: 50,
+    backgroundColor: "#6C63FF",
+    borderRadius: 10,
     justifyContent: "center",
-    borderRadius: 5,
+    alignItems: "center",
+    marginBottom: 15,
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 18,
+    fontWeight: "bold",
   },
+  linkText: {
+    color: "#6C63FF",
+    fontSize: 16,
+    marginTop: 15,
+  },
+  // Add any additional styles you need here
 });
+
+export default SignUp;
