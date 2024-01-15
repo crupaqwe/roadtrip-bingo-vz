@@ -15,11 +15,11 @@ const LobbyChoice: React.FC = () => {
     <View style={styles.container}>
       <Button
         title="Host a Lobby"
-        onPress={() => navigation.navigate('CreateLobbyScreen')}
+        onPress={() => navigation.navigate('CreateLobby')}
       />
       <Button
         title="Join a Lobby"
-        onPress={() => navigation.navigate('JoinLobbyScreen')}
+        onPress={() => navigation.navigate('JoinLobby')}
       />
     </View>
   );

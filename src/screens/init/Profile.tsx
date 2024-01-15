@@ -11,6 +11,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../utils/types/types"; // Adjust the path to your types.ts file
+import { auth } from "../../config/firebase"; // Replace with your firebase config path
+import { signOut } from "firebase/auth";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -22,9 +24,16 @@ const Profile: React.FC = () => {
 
   // Mock logout function
   const handleLogout = () => {
-    // Your actual logout logic here
-    console.log("User logged out");
-    navigation.replace("Home"); // Replace with your login screen's route name
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("User logged out");
+        navigation.replace("Home"); // Replace with your login screen's route name
+      })
+      .catch((error) => {
+        // An error happened.
+        console.error("Logout failed", error);
+      });
   };
 
   return (

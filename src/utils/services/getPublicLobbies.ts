@@ -1,8 +1,8 @@
-// services/listPublicLobbies.ts
+// services/getPublicLobbies.ts
 
 import { getDatabase, ref, query, orderByChild, equalTo, get } from 'firebase/database';
 
-export const listPublicLobbies = async () => {
+export const getPublicLobbies = async () => {
   const db = getDatabase();
   const lobbiesRef = query(ref(db, 'lobbies'), orderByChild('visibility'), equalTo('public'));
 

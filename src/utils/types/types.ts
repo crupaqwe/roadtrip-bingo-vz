@@ -2,10 +2,10 @@
 export type RootStackParamList = {
     Home: undefined;
     LobbyChoice: undefined;
-    CreateLobbyScreen: undefined;
-    JoinLobbyScreen: undefined;
+    CreateLobby: undefined;
+    JoinLobby: undefined;
     Profile: undefined;
-    
+    LobbyDetails: { lobbyId: string };
     SignUp: undefined;
     SignIn: undefined;
     ForgotPassword: undefined;

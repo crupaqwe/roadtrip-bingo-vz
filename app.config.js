@@ -36,6 +36,7 @@ export default {
       firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
+      firebaseDatabaseUrl: process.env.FIREBASE_DATABASE_URL,
       "eas": {
         "projectId": "d6e99f22-09b7-4c88-9679-62c47237dfa8"
       }

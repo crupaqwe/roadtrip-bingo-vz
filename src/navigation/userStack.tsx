@@ -4,17 +4,24 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from '../screens/init/Home';
 import Profile from '../screens/init/Profile';
-import LobbyStack from './lobbyStack'; // Import the Lobby Stack
+import LobbyChoice from "../screens/lobby/LobbyActionChoice";
+import CreateLobby from "../screens/lobby/CreateLobby";
+import JoinLobby from "../screens/lobby/PublicLobbies";
+import LobbyDetails from "../screens/lobby/ActiveLobby_beforeStart";
 
 const Stack = createStackNavigator();
 
 export default function UserStack() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="LobbyStack" component={LobbyStack} />
+        <Stack.Screen name="LobbyChoice" component={LobbyChoice} />
+        <Stack.Screen name="CreateLobby" component={CreateLobby} />
+        <Stack.Screen name="LobbyDetails" component={LobbyDetails} />
+        <Stack.Screen name="JoinLobby" component={JoinLobby} />
         <Stack.Screen name="Profile" component={Profile} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
