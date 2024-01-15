@@ -7,7 +7,7 @@ import Profile from '../screens/init/Profile';
 import LobbyChoice from "../screens/lobby/LobbyActionChoice";
 import CreateLobby from "../screens/lobby/CreateLobby";
 import JoinLobby from "../screens/lobby/PublicLobbies";
-import LobbyDetails from "../screens/lobby/ActiveLobby_beforeStart";
+import LobbyDetails from "../screens/lobby/LobbyDetails";
 
 const Stack = createStackNavigator();
 
