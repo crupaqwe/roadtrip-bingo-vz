@@ -1,7 +1,7 @@
 // types.ts
 export type RootStackParamList = {
     Home: undefined;
-    LobbyChoice: undefined;
+    LobbyActionChoice: undefined;
     CreateLobby: undefined;
     JoinLobby: undefined;
     Profile: undefined;

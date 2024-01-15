@@ -18,7 +18,7 @@ const Home: React.FC = () => {
       
       <Button
         title="Play bingo!"
-        onPress={() => navigation.navigate('LobbyChoice')}
+        onPress={() => navigation.navigate('LobbyActionChoice')}
       />
       <Button
         title="About / Profile"

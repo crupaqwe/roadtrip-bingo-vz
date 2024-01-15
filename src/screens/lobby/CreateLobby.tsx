@@ -11,12 +11,18 @@ import {
 import { getAuth } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { createLobby } from "../../utils/services/createLobby"; // Adjust the import path as needed
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../utils/types/types'; // Adjust the import path as needed
+
+// Define the navigation prop based on the RootStackParamList
+type CreateLobbyNavigationProp = StackNavigationProp<RootStackParamList>;
+
 
 const CreateLobby: React.FC = () => {
   const [lobbyName, setLobbyName] = useState("");
   const [maxPlayers, setMaxPlayers] = useState("4");
   const [isPublic, setIsPublic] = useState(true);
-  const navigation = useNavigation();
+  const navigation = useNavigation<CreateLobbyNavigationProp>();
 
   const handleCreateLobby = async () => {
     if (lobbyName.trim() === "" || isNaN(Number(maxPlayers))) {
@@ -47,9 +53,9 @@ const CreateLobby: React.FC = () => {
       });
 
       // Navigate to the Lobby Details screen with the new lobby ID
-      navigation.navigate("LobbyDetails", { lobbyId });
+      navigation.navigate('LobbyDetails', { lobbyId: lobbyId });
     } catch (error) {
-      Alert.alert("Error", `Failed to create lobby: ${error.message}`);
+      Alert.alert("Error", `Failed to create lobby: ${error}`);
     }
   };
 
