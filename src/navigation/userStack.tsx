@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from '../screens/init/Home';
 import Profile from '../screens/init/Profile';
-import LobbyChoice from "../screens/lobby/LobbyActionChoice";
+import LobbyActionChoice from "../screens/lobby/LobbyActionChoice";
 import CreateLobby from "../screens/lobby/CreateLobby";
 import JoinLobby from "../screens/lobby/PublicLobbies";
 import LobbyDetails from "../screens/lobby/LobbyDetails";
@@ -16,7 +16,7 @@ export default function UserStack() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="LobbyChoice" component={LobbyChoice} />
+        <Stack.Screen name="LobbyActionChoice" component={LobbyActionChoice} />
         <Stack.Screen name="CreateLobby" component={CreateLobby} />
         <Stack.Screen name="LobbyDetails" component={LobbyDetails} />
         <Stack.Screen name="JoinLobby" component={JoinLobby} />

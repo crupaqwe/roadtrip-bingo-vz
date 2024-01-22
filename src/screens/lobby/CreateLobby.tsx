@@ -45,6 +45,7 @@ const CreateLobby: React.FC = () => {
         visibility: isPublic ? "public" : "private",
         players: {
           [user.uid]: {
+            id: user.uid,
             name: user.displayName || "Anonymous", // Fallback to 'Anonymous' if displayName is not set
             ready: false,
             gotBingo: false,
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center", // Center the content vertically
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: '#F5FCFF',
   },
   input: {
     height: 50,

@@ -38,12 +38,7 @@ const Profile: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={styles.backButton}
-      >
-        <Text style={styles.backButtonText}>← Back</Text>
-      </TouchableOpacity>
+      
 
       <Text style={styles.header}>Profile</Text>
 
@@ -70,15 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#fff",
-  },
-  backButton: {
-    alignSelf: "flex-start",
-    marginVertical: 10,
-  },
-  backButtonText: {
-    fontSize: 18,
-    color: "#1e90ff",
+    backgroundColor: '#F5FCFF',
   },
   header: {
     fontSize: 22,

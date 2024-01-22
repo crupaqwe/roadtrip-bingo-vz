@@ -2,6 +2,7 @@
 import { getDatabase, ref, push, set } from "firebase/database";
 
 interface Player {
+  id: string
   name: string;
   ready: boolean;
   gotBingo: boolean;
@@ -24,6 +25,7 @@ export async function createLobby({ name, hostUserId, maxPlayers, visibility }: 
     // Initialize the players list with the host user
     const players: Record<string, Player> = {
       [hostUserId]: {
+        id: hostUserId,
         name: "Host's Name", // Replace with the actual name of the host
         ready: false,
         gotBingo: false
@@ -44,7 +46,7 @@ export async function createLobby({ name, hostUserId, maxPlayers, visibility }: 
       throw new Error("Failed to get the lobby key.");
     }
     return lobbyKey;
-    
+
   } catch (error) {
     console.error("Error creating lobby: ", error);
     throw error; // Re-throw the error to allow catch blocks in the calling functions to handle it

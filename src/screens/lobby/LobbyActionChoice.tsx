@@ -31,19 +31,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f7f7f7', // A light gray background
+    backgroundColor: '#F5FCFF',
   },
   button: {
     backgroundColor: '#1e90ff', // A pleasant blue
     padding: 15,
     borderRadius: 5,
-    marginVertical: 10, // Adds margin above and below the button
+    marginVertical: 150, // Adds margin above and below the button
     width: '80%', // Makes the button take 80% of container width
   },
   buttonText: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 22,
   },
 });
 

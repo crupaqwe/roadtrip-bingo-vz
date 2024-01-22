@@ -5,14 +5,21 @@ interface LeaveLobbyData {
   userId: string;
 }
 
-async function leaveLobby({ lobbyId, userId }: LeaveLobbyData) {
+export async function leaveLobby({ lobbyId, userId }: LeaveLobbyData) {
   const db = getDatabase();
   const lobbyRef = ref(db, `lobbies/${lobbyId}`);
-
+  //console.log(lobbyRef);
   try {
     await runTransaction(lobbyRef, (lobby) => {
-      if (lobby && lobby.players && lobby.players[userId]) {
+      // console.log('tried');
+      // console.log(lobby);
+      //   console.log(lobby.players);
+      //   console.log(lobby.players[1].id);
+      if (lobby && lobby.players ){//&& lobby.players[userId]) {
         // Remove the user from the lobby's players list
+        console.log(lobby);
+        console.log(lobby.players);
+        console.log(userId);
         delete lobby.players[userId];
 
         // If the lobby is now empty, you might choose to delete it

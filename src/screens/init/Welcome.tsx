@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000', // Assuming a dark theme from the image
+    backgroundColor: '#F5FCFF', // Assuming a dark theme from the image
   },
   loginTitle: {
     fontSize: 24,

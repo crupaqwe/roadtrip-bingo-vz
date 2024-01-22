@@ -41,15 +41,18 @@ const styles = StyleSheet.create({
      fontSize: 24,
      fontWeight: 'bold',
      textAlign: 'center',
-     margin: 10,
+     //margin: 10,
+     //position: 'absolute',
+     paddingBottom: 100
   },
   button: {
      alignItems: 'center',
      backgroundColor: '#6C63FF',
      padding: 10,
-     marginTop: 20,
+     marginTop: 50,
      width: '80%',
      borderRadius: 5,
+     paddingBottom: 50
   },
   buttonText: {
      fontSize: 18,
